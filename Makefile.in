@@ -1,10 +1,12 @@
 srcdir = @srcdir@
+prefix = @prefix@
 CC = @CC@
 CFLAGS = @CFLAGS@ -I.
 LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@
 VERSION = @PACKAGE_VERSION@
 VPATH = $(srcdir)
+
 
 OBJ = attach.o master.o main.o
 SRC = $(srcdir)/attach.c $(srcdir)/master.c $(srcdir)/main.c
@@ -22,6 +24,10 @@ clean:
 
 distclean: clean
 	rm -f config.h Makefile config.log config.status config.cache
+
+install: dtach
+	install -Dm 755 dtach $(prefix)/bin/dtach
+	install -Dm 644 dtach.1 $(prefix)/share/man/man1/dtach.1
 
 tar:
 	mkdir dtach-$(VERSION)
